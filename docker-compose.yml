@@ -1,0 +1,20 @@
+---
+version: '2'
+services:
+  common:
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgres://postgres:Yso5O3SGRkrJw9S3XK_L_w@db:5432/postgres
+    build: "."
+  app:
+    ports:
+    - 1337:1337
+    command: node app.js --prod
+    extends:
+      service: common
+    links:
+    - db
+    environment:
+      POSTGRES_PASSWORD: Yso5O3SGRkrJw9S3XK_L_w
+  db:
+    image: postgres
